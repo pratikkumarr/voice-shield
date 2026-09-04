@@ -1,0 +1,8 @@
+librosa
+torchaudio
+torch
+numpy
+soundfile
+scikit-learn
+fastapi
+python-multipart
