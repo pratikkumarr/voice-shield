@@ -11,6 +11,13 @@
 
 <!-- Add new entries below this line, one per step. Copy this block: -->
 
+## [Step 1] repo scaffold + ml setup — 4 Sept — AI Assistant
+**Status:** done
+**What I built:** Created repo skeleton, docker-compose stub, ml/requirements.txt, and ml/data/ structure.
+**Files touched:** docker-compose.yml, ml/requirements.txt, ml/data/README.md, ml/data/.gitignore, README.md, and empty directories.
+**What the next person needs to know:** The ML folder is set up for requirements and dataset management.
+**Blockers:** none
+
 <!--
 ## [Step N] <name> — <date> — <your name>
 **Status:** done / blocked / in progress
