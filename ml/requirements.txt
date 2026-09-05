@@ -1,0 +1,10 @@
+librosa
+torchaudio
+torch
+numpy
+soundfile
+scikit-learn
+fastapi
+python-multipart
+transformers>=4.30.0
+accelerate          # optional but recommended for efficient HF model loading
