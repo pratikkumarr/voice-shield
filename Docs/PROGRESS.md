@@ -144,3 +144,21 @@ deliberate Q&A talking point, not a bug to hide.
 **What the next person needs to know:**
 **Blockers:**
 -->
+
+## [Step 4] FastAPI Backend Setup — 6 Sept — AI Assistant
+**Status:** done
+**What I built:**
+- backend/main.py: Created the FastAPI application with CORS enabled for localhost:3000 and localhost:5173.
+  - Added GET /health for basic liveness.
+  - Added POST /analyze to handle multipart/form-data audio file uploads, temporarily save the file, call ml.risk_scoring.analyze(), enrich the response with audit_hash and timestamp, and clean up the file afterwards.
+- backend/requirements.txt: Merged backend dependencies (fastapi, uvicorn, python-multipart) with the existing ML dependencies.
+- backend/README.md: Wrote run instructions and documented the API contract as specified in Docs/TRD.md.
+**Files touched:**
+- backend/main.py [NEW]
+- backend/requirements.txt [NEW]
+- backend/README.md [NEW]
+**What the next person needs to know:**
+- The backend is fully operational against the live ML code (not a stub).
+- To run the backend, install the dependencies from backend/requirements.txt and execute uvicorn main:app --reload from the backend/ directory.
+- The next step is likely the React frontend which should hit http://localhost:8000/analyze.
+**Blockers:** none
