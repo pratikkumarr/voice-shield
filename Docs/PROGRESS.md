@@ -162,3 +162,19 @@ deliberate Q&A talking point, not a bug to hide.
 - To run the backend, install the dependencies from backend/requirements.txt and execute uvicorn main:app --reload from the backend/ directory.
 - The next step is likely the React frontend which should hit http://localhost:8000/analyze.
 **Blockers:** none
+
+## [Step 5] Streaming simulation + alert logic — 6 Sept — AI Assistant
+**Status:** done
+**What I built:**
+- backend/alerts.py: Created `recommended_action` helper with threshold logic.
+- backend/main.py: Updated `POST /analyze` to include `recommended_action`. Added `WS /stream` endpoint to process 1s binary audio chunks incrementally via WebSocket.
+- backend/README.md: Added API documentation for `/stream` and the logic for `recommended_action`.
+**Files touched:**
+- backend/alerts.py [NEW]
+- backend/main.py [MODIFIED]
+- backend/README.md [MODIFIED]
+- docs/PROGRESS.md [MODIFIED]
+**What the next person needs to know:**
+- The websocket endpoint processes binary audio messages. If chunk analysis throws an exception (e.g. chunk too small for ML), a fallback payload is returned for that chunk so the stream doesn't crash.
+- Next steps involve integrating with the frontend and/or the blockchain hash-chain logic.
+**Blockers:** none
