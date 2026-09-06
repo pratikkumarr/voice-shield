@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    /* Soft cream/off-white primary background */
+    background-color: #FAF8F3;
+    color: #2D3748;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  /* Card — clean white surface with beige/gold border */
+  .card {
+    background-color: #FFFFFF;
+    border: 1px solid #D4C5A0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  /* Card header label */
+  .card-header {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9C8B6E;
+    margin-bottom: 1rem;
+  }
+
+  /* Risk state text colours — kept vivid for clear communication */
+  .risk-green {
+    color: #16a34a;
+  }
+  .risk-amber {
+    color: #d97706;
+  }
+  .risk-red {
+    color: #dc2626;
+  }
+
+  /* Base button */
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    outline: none;
+  }
+  .btn-primary:focus {
+    ring-width: 2px;
+    ring-offset-width: 2px;
+    ring-offset-color: #FAF8F3;
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Navy primary button */
+  .btn-navy {
+    @apply btn-primary;
+    background-color: #1E3A5F;
+    color: #FFFFFF;
+  }
+  .btn-navy:hover:not(:disabled) {
+    background-color: #244876;
+  }
+  .btn-navy:focus {
+    box-shadow: 0 0 0 2px #FAF8F3, 0 0 0 4px #1E3A5F;
+  }
+
+  /* Kept for recording — soft red on light bg */
+  .btn-red {
+    @apply btn-primary;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+  .btn-red:hover:not(:disabled) {
+    background-color: #fecaca;
+  }
+
+  /* Stop button — neutral cream */
+  .btn-slate {
+    @apply btn-primary;
+    background-color: #F3EFE4;
+    color: #374151;
+    border: 1px solid #D4C5A0;
+  }
+  .btn-slate:hover:not(:disabled) {
+    background-color: #EBE4D3;
+  }
+
+  /* Alias — old teal button now mapped to navy */
+  .btn-teal {
+    @apply btn-navy;
+  }
+}
+
+/* Custom scrollbar — warm tone */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F3EFE4;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4C5A0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8A87A;
+}
+
+/* Recording pulse animation */
+@keyframes record-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.15); }
+}
+.record-pulse {
+  animation: record-pulse 1.2s ease-in-out infinite;
+}
+
+/* Spinner (no change needed — inherits currentColor) */
+@keyframes spin-dash {
+  0%   { stroke-dashoffset: 126; }
+  50%  { stroke-dashoffset: 32; }
+  100% { stroke-dashoffset: 126; }
+}
+.spinner-path {
+  animation: spin 1.4s linear infinite, spin-dash 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
