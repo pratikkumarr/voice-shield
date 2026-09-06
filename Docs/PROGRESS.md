@@ -178,3 +178,35 @@ deliberate Q&A talking point, not a bug to hide.
 - The websocket endpoint processes binary audio messages. If chunk analysis throws an exception (e.g. chunk too small for ML), a fallback payload is returned for that chunk so the stream doesn't crash.
 - Next steps involve integrating with the frontend and/or the blockchain hash-chain logic.
 **Blockers:** none
+
+## [Step 6] Frontend Dashboard — 6 Sept — AI Assistant
+**Status:** done
+**What I built:**
+- `frontend/` — React + Vite + Tailwind CSS v3 single-page dashboard (SentinelVoice)
+- `frontend/src/api/analyze.js` — `analyzeAudio()` POSTs multipart to `http://localhost:8000/analyze`; `fetchAuditHistory()` calls `GET http://localhost:8000/audit/history` and returns null (not throws) on 404/network error for graceful empty state.
+- `frontend/src/components/AudioInput.jsx` — file upload (audio/*) + MediaRecorder-based in-browser recording with live timer and clear state indicators.
+- `frontend/src/components/RiskScore.jsx` — SVG circular progress ring with green (<30) / amber (30–70) / red (>70) color bands. Renders exact backend verdict string unmodified.
+- `frontend/src/components/RecommendedAction.jsx` — displays backend-provided `recommended_action` prominently. No threshold logic duplicated in frontend.
+- `frontend/src/components/AnalysisResult.jsx` — confidence, detection flags (list or "No specific detection flags reported."), latency_ms, timestamp, audit_hash. Never shows null/undefined values.
+- `frontend/src/components/AuditTrail.jsx` — fetches `GET http://localhost:8000/audit/history`; shows "No audit records available yet" on 404; shows entries table when data is present. App never crashes when endpoint is missing.
+- `frontend/src/App.jsx` — single-page layout; clears stale result before each new analysis; animated loading state; clean user-facing error messages; no raw stack traces exposed.
+
+**Files touched:**
+- frontend/package.json [NEW], vite.config.js [NEW], tailwind.config.js [NEW], postcss.config.js [NEW], index.html [NEW], public/shield.svg [NEW]
+- frontend/src/main.jsx [NEW], App.jsx [NEW], index.css [NEW]
+- frontend/src/api/analyze.js [NEW]
+- frontend/src/components/AudioInput.jsx [NEW], RiskScore.jsx [NEW], RecommendedAction.jsx [NEW], AnalysisResult.jsx [NEW], AuditTrail.jsx [NEW]
+- frontend/README.md [NEW]
+- Docs/PROGRESS.md [MODIFIED]
+
+**What the next person needs to know:**
+- Run: `cd frontend && npm install && npm run dev` → http://localhost:5173
+- Backend must be running at http://localhost:8000 for /analyze to work.
+- `GET /audit/history` is not yet implemented in backend (returns 404). Frontend handles this gracefully with "No audit records available yet" — does NOT crash.
+- Tailwind CSS v3 is used. Do not upgrade to v4 without testing all utility classes.
+- The audit URL is exactly `http://localhost:8000/audit/history` (not a relative URL).
+- Risk threshold color bands are frontend display only. `recommended_action` string comes entirely from backend.
+- `npm run build` verified: ✓ 37 modules transformed, no errors, exit code 0.
+- `npm run dev` verified: VITE v5.4.21 ready in ~300ms on port 5173.
+
+**Blockers:** none
